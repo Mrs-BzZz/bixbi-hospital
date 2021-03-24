@@ -34,7 +34,7 @@ AddEventHandler("bixbi_hospital:notify", function(type, msg)
 		TriggerEvent("FeedM:showNotification", msg, 2500, type)
 	elseif Config.NotifyType == "mythic_notify" then
 		if type == '' or type == nil then type = 'inform' end
-		exports['mythic_notify']:SendAlert(type, msg, 2500)
+		exports['mythic_notify']:DoCustomHudText(type, msg, 2500)
 	else
 		ESX.ShowNotification(msg)
 	end
