@@ -20,7 +20,7 @@ ESX.RegisterCommand('hospital', 'user', function(xPlayer, args, showError)
 		
 		local location = args.location
 		if location == nil then
-			location = "P"
+			location = "P" -- Default location to send people (if player doesn't specify).
 		end
 		targetPlayer.triggerEvent("bixbi_hospital:send", duration, location)
 	end

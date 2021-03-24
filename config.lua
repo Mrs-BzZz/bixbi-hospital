@@ -1,12 +1,13 @@
 Config = {}
 
 Config.MaxTime = 600 -- 10 Minutes (600 seconds)
+Config.NotifyType = "esx" -- Options = t-notify, esx, feedm
 
 Config.Locations = {
-	P = {
+	P = { -- Label for sending to a specific hospital. Can change the default in the server file.
 		label = "Pillbox Hospital",
-		incoords = {354.4615, -589.2791, 43.29895},
-		outcoords = {318.5802, -579.244, 43.3158}
+		incoords = {354.4615, -589.2791, 43.29895}, -- Where you are teleported to when being sent.
+		outcoords = {318.5802, -579.244, 43.3158} -- Where you will be teleported to after the time ends.
 	},
 	B = {
 		label = "Paleto Bay Hospital",
