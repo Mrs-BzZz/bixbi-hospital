@@ -2,7 +2,12 @@
 
 Requirements:
 
-- ESX v1-Final (v1.2)
+- ESX v1 Final (v1.2)
+- Notification
+   - ESX, FeedM, Mythic, T-Notify
+- Loading bar (optional)
+   - Mythic Progress Bar
+   - Pogress Bar
 
 Commands:
 

@@ -11,17 +11,49 @@ end)
 
 local hosDuration = 0
 local location = nil
-Citizen.CreateThread(function()
-	while true do
-		Wait(1000)
-		if location ~= nil and hosDuration > 0 then
-			hosDuration = hosDuration - 1
+-- Citizen.CreateThread(function()
+-- 	while true do
+-- 		Wait(1000)
+-- 		if location ~= nil and hosDuration > 0 then
+-- 			hosDuration = hosDuration - 1
 
-			local playerPed = GetPlayerPed(-1)
-			local playerLocation = GetEntityCoords(playerPed, true)
-			local distance = Vdist(location.incoords[1], location.incoords[2], location.incoords[3], playerLocation['x'], playerLocation['y'], playerLocation['z'])
+-- 			local playerPed = GetPlayerPed(-1)
+-- 			local playerLocation = GetEntityCoords(playerPed, true)
+-- 			local distance = Vdist(location.incoords[1], location.incoords[2], location.incoords[3], playerLocation['x'], playerLocation['y'], playerLocation['z'])
 		
-			if distance > 20 and Config.CheckDistance == true then
+-- 			if distance > 20 and Config.CheckDistance == true then
+-- 				SetEntityCoords(playerPed, location.incoords[1], location.incoords[2], location.incoords[3])
+-- 				hosDuration = hosDuration + 30 -- 30 seconds.
+-- 				if hosDuration > Config.MaxTime then
+-- 					hosDuration = Config.MaxTime
+-- 				end
+-- 				TriggerEvent('chatMessage', '[EMS]', { 0, 128, 255 }, " your hospital stay time was extended as you were not officially discharged.")
+-- 				TriggerEvent('chatMessage', '[EMS]', { 0, 128, 255 }, ' You have ' .. hosDuration .. ' seconds left in hospital.')
+				
+-- 				TriggerEvent('bixbi_hospital:notify', '', "Your hospital stay time was extended as you were not officially discharged.")
+-- 				TriggerEvent('bixbi_hospital:notify', '', 'You have ' .. hosDuration .. ' seconds left in hospital.')
+-- 			end
+
+-- 			if hosDuration == 10 or hosDuration == 30 or hosDuration == 60 or hosDuration == 120 or hosDuration == 300 then
+-- 				TriggerEvent('bixbi_hospital:notify', '', 'You have ' .. hosDuration .. ' seconds left in hospital.')
+-- 				TriggerEvent('chatMessage', '[EMS]', { 0, 128, 255 }, ' You have ' .. hosDuration .. ' seconds left in hospital.')
+-- 			end
+-- 		elseif location ~= nil then
+-- 			TriggerEvent("bixbi_hospital:release")
+-- 		end
+-- 	end
+-- end)
+
+function thread()
+	if location ~= nil then
+		if hosDuration > 0 then
+			hosDuration = hosDuration - 1
+			
+			local playerPed = PlayerPedId()
+			local playerPos = GetEntityCoords(playerPed)
+			local distance = #(playerPos - location.incoords)
+			
+			if distance > 20 and Config.CheckDistance then
 				SetEntityCoords(playerPed, location.incoords[1], location.incoords[2], location.incoords[3])
 				hosDuration = hosDuration + 30 -- 30 seconds.
 				if hosDuration > Config.MaxTime then
@@ -42,7 +74,11 @@ Citizen.CreateThread(function()
 			TriggerEvent("bixbi_hospital:release")
 		end
 	end
-end)
+
+	SetTimeout(1000, thread)
+end
+
+thread()
 
 RegisterNetEvent("bixbi_hospital:send")
 AddEventHandler("bixbi_hospital:send", function(duration, inputLocation)

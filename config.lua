@@ -51,7 +51,7 @@ AddEventHandler("bixbi_hospital:loading", function(time, text)
 			duration = time,
 			label = text,
 			controlDisables = {
-				disableMovement = true,
+				disableMovement = false,
 				disableCarMovement = false,
 				disableMouse = false,
 				disableCombat = true,

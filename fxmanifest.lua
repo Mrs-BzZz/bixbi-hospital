@@ -5,7 +5,7 @@ Creation Date:	15/03/21
 fx_version 'adamant'
 game 'gta5'
 author 'Leah'
-version '1.0.0'
+version '1.1.0'
 
 client_scripts {
     'config.lua', 
