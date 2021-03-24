@@ -50,6 +50,12 @@ AddEventHandler("bixbi_hospital:loading", function(time, text)
 			name = string.gsub(text, "%s+", ""),
 			duration = time,
 			label = text,
+			controlDisables = {
+				disableMovement = true,
+				disableCarMovement = false,
+				disableMouse = false,
+				disableCombat = true,
+			},
 		}, function()
 		end)
 	else
