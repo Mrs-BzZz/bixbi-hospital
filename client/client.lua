@@ -21,7 +21,7 @@ Citizen.CreateThread(function()
 			local playerLocation = GetEntityCoords(playerPed, true)
 			local distance = Vdist(location.incoords[1], location.incoords[2], location.incoords[3], playerLocation['x'], playerLocation['y'], playerLocation['z'])
 		
-			if distance > 20 then
+			if distance > 20 and Config.CheckDistance == true then
 				SetEntityCoords(playerPed, location.incoords[1], location.incoords[2], location.incoords[3])
 				hosDuration = hosDuration + 30 -- 30 seconds.
 				if hosDuration > Config.MaxTime then

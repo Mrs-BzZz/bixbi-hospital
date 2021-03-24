@@ -2,6 +2,7 @@ Config = {}
 
 Config.MaxTime = 600 -- 10 Minutes (600 seconds)
 Config.NotifyType = "esx" -- Options = t-notify, esx, feedm
+Config.CheckDistance = true -- When true, going too far from the teleport point will teleport the player back, and add time.
 
 Config.Locations = {
 	P = { -- Label for sending to a specific hospital. Can change the default in the server file.
