@@ -72,7 +72,7 @@ AddEventHandler("bixbi_hospital:release", function()
 	local playerPed = GetPlayerPed(-1)
 	SetEntityCoords(playerPed, location.outcoords[1], location.outcoords[2], location.outcoords[3])
 
-	TriggerEvent('bixbi_hospital:notify', '', 'You have been released from ' .. location.label .. ' .')
+	TriggerEvent('bixbi_hospital:notify', '', 'You have been released from ' .. location.label .. '.')
 	TriggerEvent('chatMessage', '[EMS]', { 0, 128, 255 }, ' You have been released from ' .. location.label .. '.')
 
 	hosDuration = 0
