@@ -48,10 +48,15 @@ RegisterNetEvent("bixbi_hospital:send")
 AddEventHandler("bixbi_hospital:send", function(duration, inputLocation)
 	local loc = Config.Locations[inputLocation:upper()]
 	if loc ~= nil then
-		location = loc
-		hosDuration = duration
 		local playerPed = GetPlayerPed(-1)
 		if DoesEntityExist(playerPed) then
+			
+			DoScreenFadeOut(2000)
+			Citizen.Wait(2000)
+
+			location = loc
+			hosDuration = duration
+
 			SetEntityCoords(playerPed, loc.incoords[1], loc.incoords[2], loc.incoords[3])
 			RemoveAllPedWeapons(playerPed, true)
 			if IsPedInAnyVehicle(playerPed, false) then
@@ -60,6 +65,14 @@ AddEventHandler("bixbi_hospital:send", function(duration, inputLocation)
 			
 			TriggerEvent('bixbi_hospital:notify', '', 'You have been sent to ' .. loc.label .. ' for ' .. duration .. ' seconds.')
 			TriggerEvent('chatMessage', '[EMS]', { 0, 128, 255 }, ' You have been sent to ' .. loc.label .. ' for ' .. duration .. ' seconds.')
+		
+			Citizen.Wait(1500)
+			DoScreenFadeIn(2000)
+			if Config.CheckDistance == false then
+				TriggerEvent("bixbi_hospital:loading", duration * 1000, 'You are being observed by the medical team.')
+			else
+				TriggerEvent("bixbi_hospital:loading", 3000, 'Welcome to ' .. loc.label .. '.')
+			end
 		end
 	else
 		hosDuration = 0

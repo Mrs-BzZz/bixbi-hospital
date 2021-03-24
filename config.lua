@@ -2,13 +2,14 @@ Config = {}
 
 Config.MaxTime = 600 -- 10 Minutes (600 seconds)
 Config.NotifyType = "esx" -- Options = t-notify, esx, feedm, mythic_notify
+Config.LoadingType = "mythic" -- Options = mythic, pogress, none
 Config.CheckDistance = true -- When true, going too far from the teleport point will teleport the player back, and add time.
 
 Config.Locations = {
 	P = { -- Label for sending to a specific hospital. Can change the default in the server file.
 		label = "Pillbox Hospital",
-		incoords = {354.4615, -589.2791, 43.29895}, -- Where you are teleported to when being sent.
-		outcoords = {318.5802, -579.244, 43.3158} -- Where you will be teleported to after the time ends.
+		incoords = {336.4747, -574.0878, 35.2109}, -- Where you are teleported to when being sent.
+		outcoords = {325.3977, -583.0153, 35.2109} -- Where you will be teleported to after the time ends.
 	},
 	B = {
 		label = "Paleto Bay Hospital",
@@ -36,5 +37,22 @@ AddEventHandler("bixbi_hospital:notify", function(type, msg)
 		exports['mythic_notify']:SendAlert(type, msg, 2500)
 	else
 		ESX.ShowNotification(msg)
+	end
+end)
+
+RegisterNetEvent('bixbi_hospital:loading')
+AddEventHandler("bixbi_hospital:loading", function(time, text)
+	
+	if Config.LoadingType == "pogress" then
+		exports['pogressBar']:drawBar(time, text)
+	elseif Config.LoadingType == "mythic" then
+		exports['mythic_progbar']:Progress({
+			name = string.gsub(text, "%s+", ""),
+			duration = time,
+			label = text,
+		}, function()
+		end)
+	else
+		-- Do nothing.
 	end
 end)
